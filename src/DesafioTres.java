@@ -12,12 +12,14 @@ public class DesafioTres {
         if (input.isEmpty()) {
             // DATOS POR DEFECTO POR SI LA ARRAY NO ES ALIMENTADA
             coins = new int[] {1, 2, 4, 9};
+            System.out.println("No se ingresaron monedas. Usando datos por defecto:");
         } else {
             int n = Integer.parseInt(input);
             coins = new int[n];
 
             //  ITERAR Y ALIMENTAR EL ARRAY
             for (int i = 0; i < n; i++) {
+                System.out.println("Introduce el valor de la moneda que contendrá el array y da enter");
                 try {
                     int numero = scanner.nextInt();
                     //  VALIDAR QUE LOS NÚMEROS INGRESADOS SEAN POSITIVOS
@@ -36,12 +38,24 @@ public class DesafioTres {
             }
         }
 
+        // ORDENAR EL ARRAY
+        Arrays.sort(coins);
+
+        // MOSTRAR EL ARRAY DE MONEDAS
+        System.out.println("Monedas utilizadas:");
+        for (int coin : coins) {
+            System.out.print(coin + " ");
+        }
+        System.out.println(); // Para un salto de línea
+
         //  LLAMADO AL MÉTODO QUE OBTENDRÁ EL VALOR MÍNIMO DE CAMBIO QUE NO SE PUEDE DAR
         int minChange = findMinChange(coins);
         System.out.println("La cantidad mínima de cambio que no se puede dar es: " + minChange);
 
         scanner.close();
     }
+
+
 
     //  MÉTODO QUE OBTENDRÁ EL VALOR MÍNIMO DE CAMBIO QUE NO SE PUEDE DAR DE LAS MONEDAS QUE HAY
     public static int findMinChange(int[] coins) {
