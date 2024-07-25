@@ -6,6 +6,14 @@ public class DesafioUno {
 
     public static void main(String[] args) {
 
+        DesafioUno_1();
+
+        probarFiltrarNumero();
+
+    }
+
+    public static void DesafioUno_1() {
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Ingresa la cadena de texto generada en md5 y así determinar el valor de S: ");
@@ -134,6 +142,53 @@ public class DesafioUno {
 
         //  SE RETORNARA LA LISTA PARSEADA A ENTEROS
         return Integer.parseInt(filteredStr.toString());
+    }
+
+    // Métodos de prueba sin usar framework
+    public static void ejecutarPruebas() {
+        probarBuscarNum();
+        probarDepurarNums();
+        probarFiltrarNumero();
+    }
+
+    public static void probarBuscarNum() {
+        System.out.println("Prueba buscarNum:");
+
+        String texto1 = "abc123";
+        char resultado1 = buscarNum(texto1);
+        char esperado1 = '1';
+        assert resultado1 == esperado1 : "Fallo en prueba 1";
+
+        String texto2 = "abcdef";
+        char resultado2 = buscarNum(texto2);
+        char esperado2 = '0';
+        assert resultado2 == esperado2 : "Fallo en prueba 2";
+
+        System.out.println("Todas las pruebas de buscarNum pasaron.");
+    }
+
+    public static void probarDepurarNums() {
+        System.out.println("Prueba depurarNums:");
+
+        List<Integer> numeros = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
+        int S = 5;
+        List<Integer> resultado = depurarNums(numeros, S);
+        List<Integer> esperado = List.of(4, 3, 2, 1, 0, 4, 3, 2, 1, 0, 4, 3, 2, 1, 0);
+        assert resultado.equals(esperado) : "Fallo en prueba depurarNums";
+
+        System.out.println("Todas las pruebas de depurarNums pasaron.");
+    }
+
+    public static void probarFiltrarNumero() {
+        System.out.println("Prueba filtrarNumero:");
+
+        int numero = 12345;
+        int S = 3;
+        int resultado = filtrarNumero(numero, S);
+        int esperado = 12;
+        assert resultado == esperado : "Fallo en prueba filtrarNumero";
+
+        System.out.println("Todas las pruebas de filtrarNumero pasaron.");
     }
 
 }
