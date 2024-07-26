@@ -8,7 +8,7 @@ public class DesafioUno {
 
         DesafioUno_1();
 
-        probarFiltrarNumero();
+        ejecutarPruebas();
 
     }
 
@@ -117,7 +117,7 @@ public class DesafioUno {
         return listaProcesada;
     }
 
-    // MÉTODO QUE FILTRAR LOS DÍGITOS SEGÚN S
+    // MÉTODO QUE FILTRA LOS DÍGITOS SEGÚN S
     public static int filtrarNumero(int numero, int S) {
         //  CONVERTIR LOS NÚMEROS A UNA CADENA DE TEXTO
         String numStr = String.valueOf(numero);
@@ -144,13 +144,14 @@ public class DesafioUno {
         return Integer.parseInt(filteredStr.toString());
     }
 
-    // Métodos de prueba sin usar framework
+    //  MÉTODO DE PRUEBA
     public static void ejecutarPruebas() {
         probarBuscarNum();
         probarDepurarNums();
         probarFiltrarNumero();
     }
 
+    //  PROBAR LA BUSQUEDA DEL NÚMERO DEL TEXTO
     public static void probarBuscarNum() {
         System.out.println("Prueba buscarNum:");
 
@@ -167,6 +168,7 @@ public class DesafioUno {
         System.out.println("Todas las pruebas de buscarNum pasaron.");
     }
 
+    //  PRUEBA AL MÉTODO QUE QUE TOMA S Y QUITA LOS DIGITOS IGUALES A O MAYORES EN S
     public static void probarDepurarNums() {
         System.out.println("Prueba depurarNums:");
 
@@ -179,6 +181,7 @@ public class DesafioUno {
         System.out.println("Todas las pruebas de depurarNums pasaron.");
     }
 
+    //  PRUEBA PARA AGREGAR A LA LISTA LOS DIGITOS QUE SEAN MENORES A S
     public static void probarFiltrarNumero() {
         System.out.println("Prueba filtrarNumero:");
 

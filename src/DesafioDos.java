@@ -4,6 +4,15 @@ import java.util.Scanner;
 
 public class DesafioDos {
     public static void main(String[] args) {
+
+        DesafioUno_2();
+
+        ejecutarPruebas();
+
+    }
+
+    public static void DesafioUno_2() {
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Ingresa la cadena de texto generada en md5 y así determinar el valor de S: ");
@@ -50,8 +59,8 @@ public class DesafioDos {
         } else {
             System.out.println("Se debe volver a pedir un texto porque no tuvo ningún número");
         }
-
     }
+
 
     //  MÉTODO PARA ENCONTRAR EL PRIMER NÚMERO DE LA CADENA
     public static char buscarNum(String texto) {
@@ -69,12 +78,11 @@ public class DesafioDos {
     public static List<Integer> numsProcesados(List<Integer> numeros, int S) {
         List<Integer> numElevados = new ArrayList<>();
         //  VARIABLE QUE VALDRÁ LO MISMO QUE S PARA LUEGO CONCATENARLA
-        int newS = S;
 
         //  PASAR S A STRING
         String numStr = Integer.toString(S);
-        //  PASAR EL NUEVO NÚMERO QUE VALE IGUA QUE S A STRING
-        String numNewStr = Integer.toString(newS);
+        //  PASAR EL NUEVO NÚMERO QUE VALE IGUAL QUE S A STRING
+        String numNewStr = Integer.toString(S);
         // CONCATENAR LOS DOS NÚMEROS QUE ESTÁN EN STRING
         String concatenarNumsStr = numStr + numNewStr;
 
@@ -114,5 +122,61 @@ public class DesafioDos {
         }
         return listNums;
     }
+
+    //  MÉTODO DE PRUEBA
+    public static void ejecutarPruebas() {
+        probarBuscarNum();
+        probarNumsProcesados();
+        probarManualSort();
+    }
+
+    //  PROBAR LA BUSQUEDA DEL NÚMERO DEL TEXTO
+    public static void probarBuscarNum() {
+        System.out.println("Prueba buscarNum:");
+
+        String texto1 = "abc123";
+        char resultado1 = buscarNum(texto1);
+        char esperado1 = '1';
+        assert resultado1 == esperado1 : "Fallo en prueba 1";
+
+        String texto2 = "abcdef";
+        char resultado2 = buscarNum(texto2);
+        char esperado2 = '0';
+        assert resultado2 == esperado2 : "Fallo en prueba 2";
+
+        System.out.println("Todas las pruebas de buscarNum pasaron.");
+    }
+
+    // PROBAR QUE LOS NÚMEROS QUE SE RETORNAN SEAN MENORES A LA CONCATENACIÓN DE S CON S
+    public static void probarNumsProcesados() {
+        System.out.println("Prueba numsProcesados:");
+
+        List<Integer> numeros = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        int S = 5;
+        List<Integer> resultado = numsProcesados(numeros, S);
+        List<Integer> esperado = List.of(1, 4, 9, 16, 25, 36, 49);
+        assert resultado.equals(esperado) : "Fallo en prueba numsProcesados";
+
+        numeros = List.of(5, 6, 7, 8, 9);
+        S = 3;
+        resultado = numsProcesados(numeros, S);
+        esperado = List.of(25);
+        assert resultado.equals(esperado) : "Fallo en prueba numsProcesados caso 2";
+
+        System.out.println("Todas las pruebas de numsProcesados pasaron.");
+    }
+
+    // PROBAR QUE LOS NÚMEROS DEL ARRAY QUEDEN EN ORDEN
+    public static void probarManualSort() {
+        System.out.println("Prueba manualSort:");
+
+        List<Integer> numeros = new ArrayList<>(List.of(5, 3, 8, 6, 2, 7));
+        List<Integer> resultado = manualSort(numeros);
+        List<Integer> esperado = List.of(2, 3, 5, 6, 7, 8);
+        assert resultado.equals(esperado) : "Fallo en prueba manualSort";
+
+        System.out.println("Todas las pruebas de manualSort pasaron.");
+    }
+
 }
 

@@ -53,6 +53,9 @@ public class DesafioTres {
         System.out.println("La cantidad mínima de cambio que no se puede dar es: " + minChange);
 
         scanner.close();
+
+        // EJECUTAR LAS PRUEBAS
+        ejecutarPruebas();
     }
 
 
@@ -78,5 +81,33 @@ public class DesafioTres {
         //  RETORNA EL CAMBIO MÍNIMO QUE NO SE PUEDE DAR
         return currentChange + 1;
     }
+
+    //  MÉTODO DE PRUEBA
+    public static void ejecutarPruebas() {
+        probarFindMinChange();
+    }
+
+    // PROBAR LA ENTREGA DEL CAMBIO MÍNIMO QUE NO SE PUEDE DAR
+    public static void probarFindMinChange() {
+        System.out.println("Prueba findMinChange:");
+
+        int[] monedas1 = {1, 2, 4, 9};
+        int resultado1 = findMinChange(monedas1);
+        int esperado1 = 8;
+        assert resultado1 == esperado1 : "Fallo en prueba 1";
+
+        int[] monedas2 = {1, 1, 1, 1};
+        int resultado2 = findMinChange(monedas2);
+        int esperado2 = 5;
+        assert resultado2 == esperado2 : "Fallo en prueba 2";
+
+        int[] monedas3 = {1, 2, 5, 10, 20, 50};
+        int resultado3 = findMinChange(monedas3);
+        int esperado3 = 4;
+        assert resultado3 == esperado3 : "Fallo en prueba 3";
+
+        System.out.println("Todas las pruebas de los métodos pasaron.");
+    }
+
 }
 
