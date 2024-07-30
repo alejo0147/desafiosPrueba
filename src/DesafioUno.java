@@ -4,26 +4,28 @@ import java.util.Scanner;
 
 public class DesafioUno {
 
+    //  SE CREA MAIN QUE LLAMA EL MÉTODO PARA CORRER LA PRUEBA Y LA PRUEBA UNITARIA
     public static void main(String[] args) {
-
+        //  LLAMADO AL MÉTODO PARA HACER LA PRUEBA
         DesafioUno_1();
-
+        //  LLAMADO AL MÉTODO QUE REALIZA LAS PRUEBAS UNITARIAS
         ejecutarPruebas();
 
     }
 
+    //  MÉTODO QUE EJECUTA LA PRUEBA UNO SOLICITADA
     public static void DesafioUno_1() {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Ingresa la cadena de texto generada en md5 y así determinar el valor de S: ");
+        System.out.println("Ingresa la cadena de texto generada en md5 para determinar el valor de S: ");
         //  VARIABLE QUE TENDRÁ EL VALOR DEL TEXTO INGRESADO
         String textoAlfaNum = scanner.nextLine();
-        //  VARIABLE TIPO CHAR QUE TOMAR´PA EL VALOR DEL PRIMER CARACTER NUMÉRICO ENCONTRADO
+        //  VARIABLE TIPO CHAR QUE TOMARÁ EL VALOR DEL PRIMER CARACTER NUMÉRICO ENCONTRADO
         char primerNum = buscarNum(textoAlfaNum);
-        //  SI EL CARACTER FUE NUMÉRICO SE CONVERTIRÁ A NÚMERO Y SE ASIGNARÁ A LA VARIABLE S
+        //  LA VARIABLE S TOMARÁ EL VALOR DEL PRIMER CARACTER NUMÉRICO QUE SE HAYA ENCONTRADO
         int S = (Character.getNumericValue(primerNum));
-        //  VALIDAMOS SI HUBO CARACTER NUMÉRICO Y SI NO ES ASÍ SOLICITAR QUE SE VUELVA A SOLICITAR OTRO Y EJECUTAR DE NUEVO
+        //  VALIDAMOS SI EL VALOR NUMÉRICO ES DIFERENTE A CERO
         if (S != 0) {
             System.out.println("El primer número de 1-9 encontrado en el texto es: " + S);
 
@@ -33,17 +35,28 @@ public class DesafioUno {
             //  LISTA QUE CONTENDRÁ LOS NÚMEROS DEL ARRAY
             List<Integer> numArr = new ArrayList<>();
             if (cantNumArray.isEmpty()) {
-                //  NÚMEROS DEL ARRAY POR DEFECTO SI NO SE INGRESAN NÚMEROS PARA ALIMENTAR EL ARRAY
+                //  NÚMEROS POR DEFECTO SI NO SE ALIMENTA EL ARRAY
                 numArr = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
             } else {
-                int num = Integer.parseInt(cantNumArray);
-                boolean validInput = true;
+                int num = 0;
+                boolean validInput = false;
 
-                System.out.println("Introduce los números del array uno por uno y da enter");
-                for (int i = 0; i < num; i++) {
+                //  VALIDAR QUE SEA UN NÚMERO
+                while (!validInput) {
                     try {
+                        num = Integer.parseInt(cantNumArray);
+                        validInput = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Entrada no válida, introduce un número:");
+                        cantNumArray = scanner.nextLine();
+                    }
+                }
+
+                for (int i = 0; i < num; i++) {
+                    System.out.println("Introduce los números del array uno por uno y da enter");
+                    if (scanner.hasNextInt()) {
                         int numero = scanner.nextInt();
-                        if (numero > 100 || numero == -1) {
+                        if (numero > 100 || numero <= -1) {
                             System.out.println("Todos los números deben ser máximo 100 y mínimo 0. Inténtalo de nuevo.");
                             validInput = false;
                             numArr.clear();
@@ -52,7 +65,7 @@ public class DesafioUno {
                         } else {
                             numArr.add(numero);
                         }
-                    } catch (NumberFormatException e) {
+                    } else {
                         System.out.println("Entrada no válida. Inténtalo de nuevo.");
                         validInput = false;
                         numArr.clear();
@@ -61,7 +74,7 @@ public class DesafioUno {
                     }
                 }
                 if (!validInput) {
-                    System.out.println("Los números ingresados deben ser mayores de -1 y menos a 100, debes intentarlo de nuevo.");
+                    System.out.println("Deben ser números y deben ser mayores de 0 y menores a 100, debes intentarlo de nuevo.");
                     return;
                 }
             }
@@ -82,7 +95,7 @@ public class DesafioUno {
 
     //  MÉTODO PARA ENCONTRAR EL PRIMER NÚMERO DE LA CADENA
     public static char buscarNum(String texto) {
-        //  ESTE FOR RECORRE EL TEXTO POR CARACTER CON toCharArray
+        //  ESTE FOR ITERA EL TEXTO CARACTER POR CARACTER CON toCharArray
         for (char numChar : texto.toCharArray()) {
             if (numChar >= '1' && numChar <= '9') {
                 //  RETORNA EL PRIMER CARACTER NUMÉRICO ENCONTRADO
@@ -144,8 +157,11 @@ public class DesafioUno {
         return Integer.parseInt(filteredStr.toString());
     }
 
-    //  MÉTODO DE PRUEBA
+    //  MÉTODO DE PRUEBA UNITARIA QUE LLAMA CADA PRUEBA
     public static void ejecutarPruebas() {
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------PRUEBAS UNITARIAS--------------------------------------");
         probarBuscarNum();
         probarDepurarNums();
         probarFiltrarNumero();

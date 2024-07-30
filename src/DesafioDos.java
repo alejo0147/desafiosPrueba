@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +23,7 @@ public class DesafioDos {
         char primerNum = buscarNum(textoAlfaNum);
         //  SI EL CARACTER FUE NUMÉRICO SE CONVERTIRÁ A NÚMERO Y SE ASIGNARÁ A LA VARIABLE S
         int S = (Character.getNumericValue(primerNum));
-        //  VALIDAMOS SI HUBO CARACTER NUMÉRICO Y SI NO ES ASÍ SOLICITAR QUE SE VUELVA A SOLICITAR OTRO Y EJECUTAR DE NUEVO
+        //  VALIDAMOS SI EL VALOR NUMÉRICO ES DIFERENTE A CERO
         if (S != 0) {
             System.out.println("El primer número de 1-9 encontrado en el texto es: " + S);
 
@@ -32,27 +33,46 @@ public class DesafioDos {
             //  LISTA QUE CONTENDRÁ LOS NÚMEROS DEL ARRAY
             List<Integer> numArr;
             if (cantNumArray.isEmpty()) {
-                //  NÚMEROS DEL ARRAY POR DEFECTO SI NO SE INGRESAN NÚMEROS PARA ALIMENTAR EL ARRAY
+                //  NÚMEROS POR DEFECTO SI NO SE ALIMENTA EL ARRAY
                 numArr = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
             } else {
                 numArr = new ArrayList<>();
-                int num = Integer.parseInt(cantNumArray);
+                int num = 0;
+                boolean validInput = false;
+
+                while (!validInput) {
+                    try {
+                        num = Integer.parseInt(cantNumArray);
+                        validInput = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Entrada no válida, introduce un número:");
+                        cantNumArray = scanner.nextLine();
+                    }
+                }
+
                 for (int i = 0; i < num; i++) {
                     System.out.println("Introduce los números del array uno por uno y da enter");
-                    int numAr = scanner.nextInt();
-                    numArr.add(numAr);
+                    if (scanner.hasNextInt()) {
+                        int numAr = scanner.nextInt();
+                        numArr.add(numAr);
+                    } else {
+                        System.out.println("Entrada no válida. Inténtalo de nuevo.");
+                        validInput = false;
+                        numArr.clear();
+                        scanner.nextLine();
+                        break;
+                    }
                 }
             }
 
+            //  LA LISTA numArr USARÁ EL MÉTODO manualSort PARA ORGANIZAR LOS NÚMEROS DE LA MISMA
             numArr = manualSort(numArr);
             System.out.println("Los números a elevar en orden ascendente " + numArr);
 
-
             //  LISTA DE ENTEROS QUE SERÁ DEPURADA PARA SACAR LOS NÚMEROS >= S
             List<Integer> listFinal = numsProcesados(numArr, S);
-
-            System.out.println("Resultado:");
-            System.out.println(listFinal);
+            //  RESULTADO FINAL
+            System.out.println("Resultado: " + listFinal);
 
             scanner.close();
 
@@ -125,6 +145,9 @@ public class DesafioDos {
 
     //  MÉTODO DE PRUEBA
     public static void ejecutarPruebas() {
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------PRUEBAS UNITARIAS--------------------------------------");
         probarBuscarNum();
         probarNumsProcesados();
         probarManualSort();

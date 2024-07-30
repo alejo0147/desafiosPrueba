@@ -3,42 +3,61 @@ import java.util.Scanner;
 
 public class DesafioTres {
     public static void main(String[] args) {
+        //  PARA SOLICITAR LA ENTRADA AL USUARIO DEL TEXTO Y DEMÁS DATOS
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Introduce la cantidad de monedas para crear el array o presiona Enter para usar datos por defecto");
         String input = scanner.nextLine();
 
+        //  VARIABLE QUE ES DE TIPO ARRAY
         int[] coins;
+
+        // VALIDA SI EL DATO INSERTADO ES VACÍO
         if (input.isEmpty()) {
             // DATOS POR DEFECTO POR SI LA ARRAY NO ES ALIMENTADA
             coins = new int[] {1, 2, 4, 9};
             System.out.println("No se ingresaron monedas. Usando datos por defecto:");
         } else {
-            int n = Integer.parseInt(input);
+            int n = 0;
+            boolean validInput = false;
+
+            while (!validInput) {
+                try {
+                    n = Integer.parseInt(input);
+                    validInput = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Entrada no válida, introduce un número:");
+                    input = scanner.nextLine();
+                }
+            }
+
             coins = new int[n];
 
             //  ITERAR Y ALIMENTAR EL ARRAY
             for (int i = 0; i < n; i++) {
-                System.out.println("Introduce el valor de la moneda que contendrá el array y da enter");
-                try {
-                    int numero = scanner.nextInt();
-                    //  VALIDAR QUE LOS NÚMEROS INGRESADOS SEAN POSITIVOS
-                    if (numero < 0){
-                        System.out.println("Los valores de las monedas deben ser positivos");
-                        scanner.nextLine();
-                        return;
+                boolean validCoinInput = false;
+
+                while (!validCoinInput) {
+                    System.out.println("Introduce el valor de la moneda que contendrá el array y da enter");
+                    try {
+                        int numero = Integer.parseInt(scanner.nextLine());
+
+                        //  VALIDAR QUE LOS NÚMEROS INGRESADOS SEAN POSITIVOS
+                        if (numero < 0) {
+                            System.out.println("Los valores de las monedas deben ser positivos");
+                        } else {
+                            coins[i] = numero;
+                            validCoinInput = true;
+                        }
+                    } catch (NumberFormatException e) {
+                        //  SI LOS NÚMEROS NO SON POSITIVOS DAR MENSAJE
+                        System.out.println("Entrada no válida. Inténtalo de nuevo.");
                     }
-                    coins[i] = numero;
-                } catch (NumberFormatException e){
-                    //  SI LOS NÚMEROS NO SON POSITIVOS DAR MENSAJE
-                    System.out.println("Entrada no válida. Inténtalo de nuevo.");
-                    scanner.nextLine();
-                    return;
                 }
             }
         }
 
-        // ORDENAR EL ARRAY
+        // ORDENAR EL ARRAY CON EL MÉTODO PROPIO DE JAVA
         Arrays.sort(coins);
 
         // MOSTRAR EL ARRAY DE MONEDAS
@@ -84,6 +103,9 @@ public class DesafioTres {
 
     //  MÉTODO DE PRUEBA
     public static void ejecutarPruebas() {
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------PRUEBAS UNITARIAS--------------------------------------");
         probarFindMinChange();
     }
 
