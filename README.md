@@ -1,6 +1,6 @@
 # desafiosPrueba
 
-En este Git se encuentran 3 desafios para recorrer listas con valores dados o por defecto y con un condicionamiento basado en un número que se saca de un texto, así como un reto para saber el cambio mínimo que no se puede dar basado en unas monedas.
+En este Git se encuentran 3 desafios para recorrer listas con valores dados o por defecto. Con un texto que se trae desde una aplicación se realizan los desafios 1 y 2. Hay un desafio 3 en el cual se desea saber el cambio mínimo que no se puede dar basado en unas monedas que serán ingresadas por consola.
 
 Para el reto uno y dos se debe ingresar a
 https://www.md5hashgenerator.com
