@@ -4,26 +4,9 @@ import java.util.List;
 public class NumerosArmstrong {
 
     public static void main(String[] args) {
-<<<<<<< HEAD
         //  Lista que tendrá como valores lo que nos traiga el método obtenerNumeros
         List<Integer> numeros = obtenerNumeros();
         //  Listar los números resultantes de la lista
-        System.out.println("Números de Armstrong de 3 cifras: " + numeros);
-    }
-
-    public static List<Integer> obtenerNumeros() {
-        //  Declarar la lista de números
-        List<Integer> numeros = new ArrayList<>();
-
-        // Recorremos todos los números de 3 cifras que van de 100 a 999
-        for (int i = 100; i <= 999; i++) {
-            //  Llamar el método sumarCubosDeDigitos que es sumar cada número al cubo
-            int sumaCubos = sumarCubosDeDigitos(i);
-
-            // Si la suma de los cubos de los dígitos es igual al número, lo agregamos a la lista
-=======
-        //  Se usará una lista que tendrá los números narcisistas que traíga el método obtenerNumeros
-        List<Integer> numeros = obtenerNumeros();
         System.out.println("Números de Armstrong de 3 cifras: " + numeros);
     }
 
@@ -38,7 +21,6 @@ public class NumerosArmstrong {
             int sumaCubos = sumarCubosDeDigitos(i);
 
             //  Si la suma de los cubos de los dígitos es igual al número, lo agregamos a la lista
->>>>>>> master
             if (sumaCubos == i) {
                 numeros.add(i);
             }
@@ -47,19 +29,11 @@ public class NumerosArmstrong {
         return numeros;
     }
 
-<<<<<<< HEAD
     // Método que toma un número y retorna la suma de los cubos de sus dígitos
     public static int sumarCubosDeDigitos(int numero) {
         //  Var que sirve para ir sumando el resultado del cubo
         int suma = 0;
         //  Var que tendrá el valor enviado desde el for
-=======
-    //  Método que toma un número y retorna la suma de los cubos de sus dígitos
-    public static int sumarCubosDeDigitos(int numero) {
-        //  Var que tendrá el valor de los cubos sumados
-        int suma = 0;
-        //  Var que valdrá por el número que venga del for - o sea el que está recorriendo el for
->>>>>>> master
         int temp = numero;
 
         //  Iteramos sobre cada dígito
@@ -71,11 +45,7 @@ public class NumerosArmstrong {
             //  Eliminamos el último dígito
             temp /= 10;
         }
-<<<<<<< HEAD
-        //  retorna el valor de la suma de los cubos al for
-=======
         //  retorna el número que tiene la suma de los cubos de cada dígito al for
->>>>>>> master
         return suma;
     }
 }
